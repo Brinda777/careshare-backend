@@ -8,6 +8,7 @@ import { User } from './user/entity/user.entity';
 import { ConfigModule } from '@nestjs/config';
 import { SmsModule } from './sms/sms.module';
 import { IEventModule } from './i-event/i-event.module';
+import { DonationModule } from './donation/donation.module';
 
 @Module({
   imports: [
@@ -27,6 +28,7 @@ import { IEventModule } from './i-event/i-event.module';
     }),
     SmsModule,
     IEventModule,
+    DonationModule,
   ],
   controllers: [AppController],
   providers: [AppService],

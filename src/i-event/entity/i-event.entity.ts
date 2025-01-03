@@ -13,7 +13,7 @@ export class IEvent extends CommonAttribute {
   @Column('varchar', { name: 'description', nullable: true })
   description?: string;
 
-  @Column('varchar', { name: 'location', unique: true })
+  @Column('varchar', { name: 'location', nullable: true })
   location: string;
 
   @Column('varchar', { name: 'impact', nullable: false })
