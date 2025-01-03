@@ -20,12 +20,7 @@ async function bootstrap() {
   const port = process.env['APP_PORT'];
 
   await app.listen(port, () =>
-    console.info(
-      `\n=================================================================\n
-            App started at 
-            URL:['${port}'] - ENV: [${process.env.APP_ENV}]
-      \n=================================================================`,
-    ),
+    {}
   );
 
   console.log(
