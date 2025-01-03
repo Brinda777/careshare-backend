@@ -38,10 +38,14 @@ export class DonationService {
       order: orderParams || { createdAt: 'DESC' },
       take: paginationInput?.limit || 10,
       skip: ((paginationInput?.page || 1) - 1) * (paginationInput?.limit || 10),
+      relations: ['user', 'event'],
     });
   }
   async getOne(whereParams?: FindOptionsWhere<Donation>) {
-    return await this.donationRepository.findOne({ where: whereParams || {} });
+    return await this.donationRepository.findOne({
+      where: whereParams || {},
+      relations: ['user', 'event'],
+    });
   }
   async delete(id: string) {
     const result = await this.donationRepository.delete(id);

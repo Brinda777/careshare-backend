@@ -29,8 +29,14 @@ export class DonationController {
   ) {}
   @Get()
   async getDonations(@Query() filterInput?: FilterDonationDto) {
-    const { limit, page } = filterInput;
+    const { limit, page, type, userId } = filterInput;
     const getParams: FindOptionsWhere<Donation> = {};
+    if (type) {
+      getParams.type = type;
+    }
+    if (userId) {
+      getParams.user = { id: userId };
+    }
     const [donations, count] = await this.donationService.get(getParams, null, {
       limit,
       page,
