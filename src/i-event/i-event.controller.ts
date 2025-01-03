@@ -15,10 +15,14 @@ import { IEvent } from './entity/i-event.entity';
 import { FindOptionsWhere } from 'typeorm';
 import { CreateEventDto } from './dto/create-event.dto';
 import { UpdateEventDto } from './dto/update-event.dto';
+import { NotificationService } from 'src/notification/notification.service';
 
 @Controller('event')
 export class IEventController {
-  constructor(private readonly eventService: IEventService) {}
+  constructor(
+    private readonly eventService: IEventService,
+    private readonly notificationService: NotificationService,
+  ) {}
   @Get()
   async getEvents(@Query() filterInput?: FilterEventDto) {
     const { limit, page } = filterInput;
@@ -51,8 +55,20 @@ export class IEventController {
     @Param('id') id: string,
     @Body() updateEventDto: UpdateEventDto,
   ) {
+    //? Validate
+    const event = await this.getEvent(id);
     const result = await this.eventService.update(id, updateEventDto);
-    if (result.affected === 1) return 'Event has been updated.';
+    if (result.affected === 1) {
+      //? Notify
+      const { title, description } = updateEventDto;
+      await this.notificationService.create({
+        event: event,
+        title: title || event.title,
+        description: description || event.description,
+      });
+
+      return 'Event has been updated.';
+    }
     throw new BadRequestException('Event was not updated.');
   }
   @Delete(':id')
