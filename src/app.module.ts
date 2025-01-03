@@ -10,6 +10,7 @@ import { SmsModule } from './sms/sms.module';
 import { IEventModule } from './i-event/i-event.module';
 import { DonationModule } from './donation/donation.module';
 import { NotificationModule } from './notification/notification.module';
+import { ReportModule } from './report/report.module';
 
 @Module({
   imports: [
@@ -31,6 +32,7 @@ import { NotificationModule } from './notification/notification.module';
     IEventModule,
     DonationModule,
     NotificationModule,
+    ReportModule,
   ],
   controllers: [AppController],
   providers: [AppService],
