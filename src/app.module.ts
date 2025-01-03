@@ -9,6 +9,7 @@ import { ConfigModule } from '@nestjs/config';
 import { SmsModule } from './sms/sms.module';
 import { IEventModule } from './i-event/i-event.module';
 import { DonationModule } from './donation/donation.module';
+import { NotificationModule } from './notification/notification.module';
 
 @Module({
   imports: [
@@ -29,6 +30,7 @@ import { DonationModule } from './donation/donation.module';
     SmsModule,
     IEventModule,
     DonationModule,
+    NotificationModule,
   ],
   controllers: [AppController],
   providers: [AppService],
