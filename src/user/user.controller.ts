@@ -8,10 +8,13 @@ import {
   Param,
   Patch,
   Query,
+  UploadedFile,
+  UseInterceptors,
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { PaginationInput } from 'src/common';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { FileInterceptor } from '@nestjs/platform-express';
 
 @Controller('user')
 export class UserController {
@@ -55,5 +58,15 @@ export class UserController {
   @Delete(':id')
   async deleteUser(@Param(':id') id: string) {
     return await this.userService.delete(id);
+  }
+
+  @Patch('profile-image/:id')
+  @UseInterceptors(FileInterceptor('file'))
+  async uploadProfileImage(
+    @Param('id') id: string,
+    @UploadedFile() file: Express.Multer.File,
+  ) {
+    if (!file) throw new BadRequestException('File is required.');
+    return await this.updateUser(id, { profileImage: file.filename });
   }
 }

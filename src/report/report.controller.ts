@@ -1,4 +1,5 @@
 import {
+  BadRequestException,
   Body,
   Controller,
   Get,
@@ -22,10 +23,12 @@ export class ReportController {
     @Body() createReportDto: CreateReportDto,
     @UploadedFile() file: Express.Multer.File,
   ) {
+    if (!file) throw new BadRequestException('File is required.');
     return await this.reportService.create({
       user: {
         id: createReportDto.userId,
       },
+      image: file?.filename,
       ...createReportDto,
     });
   }

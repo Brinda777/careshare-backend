@@ -11,7 +11,8 @@ import { IEventModule } from './i-event/i-event.module';
 import { DonationModule } from './donation/donation.module';
 import { NotificationModule } from './notification/notification.module';
 import { ReportModule } from './report/report.module';
-
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
 @Module({
   imports: [
     AuthModule,
@@ -33,6 +34,9 @@ import { ReportModule } from './report/report.module';
     DonationModule,
     NotificationModule,
     ReportModule,
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', 'uploads'),
+    }),
   ],
   controllers: [AppController],
   providers: [AppService],

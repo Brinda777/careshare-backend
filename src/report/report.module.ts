@@ -4,12 +4,19 @@ import { ReportController } from './report.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { IReport } from './entity/report.entity';
 import { MulterModule } from '@nestjs/platform-express';
+import { diskStorage } from 'multer';
 
 @Module({
   imports: [
     TypeOrmModule.forFeature([IReport]),
     MulterModule.register({
-      dest: './uploads',
+      storage: diskStorage({
+        destination: './uploads',
+        filename: (req, file, cb) => {
+          const filename = `${Date.now()}-${file.originalname}`;
+          cb(null, filename);
+        },
+      }),
     }),
   ],
   providers: [ReportService],
