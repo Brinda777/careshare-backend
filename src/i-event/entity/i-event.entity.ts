@@ -27,4 +27,7 @@ export class IEvent extends CommonAttribute {
 
   @Column('varchar', { name: 'disaster', nullable: true })
   disaster?: string;
+
+  @Column('int', { name: 'funds', default: 0 })
+  funds?: number;
 }

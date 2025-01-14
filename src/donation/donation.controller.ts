@@ -78,7 +78,13 @@ export class DonationController {
       await this.eventService.update(event.id, {
         attendees: Number(event.attendees + 1),
       });
+    } else {
+      //? Amount spent by donors
+      await this.eventService.update(event.id, {
+        funds: Number(event.funds + amount),
+      });
     }
+
     return donation;
   }
   @Patch(':id')
