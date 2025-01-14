@@ -6,7 +6,10 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   //cors config
-  app.enableCors();
+  app.enableCors({
+    origin: true,
+    credentials: true,
+  });
   app.useGlobalPipes(
     new ValidationPipe({
       whitelist: true,
@@ -19,9 +22,7 @@ async function bootstrap() {
 
   const port = process.env['APP_PORT'];
 
-  await app.listen(port, () =>
-    {}
-  );
+  await app.listen(port, () => {});
 
   console.log(
     `App running at ${process.env.APP_HOST || 'localhost'}:${process.env.APP_PORT}`,

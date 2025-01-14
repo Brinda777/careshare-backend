@@ -8,7 +8,7 @@ export class INotification extends CommonAttribute {
   @Column('uuid', { name: 'id', primary: true })
   id: string;
 
-  @ManyToOne((type) => IEvent, (event) => event.id)
+  @ManyToOne((type) => IEvent, (event) => event.id, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'event_id' })
   event: IEvent;
 

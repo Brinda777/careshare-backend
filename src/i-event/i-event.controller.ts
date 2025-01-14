@@ -8,6 +8,8 @@ import {
   Patch,
   Post,
   Query,
+  UploadedFile,
+  UseInterceptors,
 } from '@nestjs/common';
 import { IEventService } from './i-event.service';
 import { FilterEventDto } from './dto/filter-event.dto';
@@ -16,6 +18,7 @@ import { FindOptionsWhere } from 'typeorm';
 import { CreateEventDto } from './dto/create-event.dto';
 import { UpdateEventDto } from './dto/update-event.dto';
 import { NotificationService } from 'src/notification/notification.service';
+import { FileInterceptor } from '@nestjs/platform-express';
 
 @Controller('event')
 export class IEventController {
@@ -47,17 +50,35 @@ export class IEventController {
     return event;
   }
   @Post()
-  async createEvent(@Body() createEventDto: CreateEventDto) {
-    return await this.eventService.create(createEventDto);
+  @UseInterceptors(FileInterceptor('file'))
+  async createEvent(
+    @Body() createEventDto: CreateEventDto,
+    @UploadedFile() file: Express.Multer.File,
+  ) {
+    if (!file) throw new BadRequestException('File is required.');
+    return await this.eventService.create({
+      ...createEventDto,
+      image: file?.filename,
+    });
   }
   @Patch(':id')
+  @UseInterceptors(FileInterceptor('file'))
   async updateEvent(
     @Param('id') id: string,
     @Body() updateEventDto: UpdateEventDto,
+    @UploadedFile() file?: Express.Multer.File,
   ) {
     //? Validate
     const event = await this.getEvent(id);
-    const result = await this.eventService.update(id, updateEventDto);
+    const result = await this.eventService.update(
+      id,
+      file
+        ? {
+            image: file?.filename,
+            ...updateEventDto,
+          }
+        : updateEventDto,
+    );
     if (result.affected === 1) {
       //? Notify
       const { title, description } = updateEventDto;
