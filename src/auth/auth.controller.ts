@@ -16,6 +16,7 @@ export class AuthController {
   // Inject AuthService to handle authentication-related business logic
   constructor(private readonly authService: AuthService) {}
 
+  // Endpoint for user registration
   @Post('register')
   async register(@Body() registerDto: RegisterDto) {
     return await this.authService.register(registerDto);
