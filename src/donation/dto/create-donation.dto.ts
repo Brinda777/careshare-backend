@@ -16,6 +16,7 @@ export class CreateDonationItemDto {
   @IsString()
   @IsNotEmpty()
   name?: string;
+
   @IsOptional()
   @IsNumber()
   @IsNotEmpty()
