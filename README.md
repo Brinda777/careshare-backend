@@ -2,13 +2,18 @@
   <h1>🌐 CareShareNepal Backend</h1>
 </p>
 
-![CircleCI Build Status][circleci-image]  
-[![CircleCI][circleci-image]][circleci-url]
-
-
 ## Description
 
 The CareShareNepal backend supports the core functionalities of the mobile and admin platforms for a disaster relief coordination system. This platform connects donors, volunteers, and NGOs to streamline disaster relief efforts in Nepal, providing users with real-time updates and efficient communication.
+
+## 📋 Features
+
+- Disaster reporting and management system.
+- Real-time notifications for disaster updates.
+- Donation and volunteer registration tracking.
+- Integration with payment gateways like eSewa and Khalti.
+
+---
 
 ## Installation
 
