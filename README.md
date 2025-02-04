@@ -11,7 +11,7 @@
 
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+The CareShareNepal backend supports the core functionalities of the mobile and admin platforms for a disaster relief coordination system. This platform connects donors, volunteers, and NGOs to streamline disaster relief efforts in Nepal, providing users with real-time updates and efficient communication.
 
 ## Installation
 
