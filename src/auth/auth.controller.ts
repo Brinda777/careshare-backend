@@ -10,7 +10,7 @@ import {
 // Import custom decorators and interfaces for authentication and user handling
 import { AtGuard, CurrentUser } from './decorator';
 import { IPayload } from './model';
-
+// Define the controller for authentication, using the '/auth' route
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
