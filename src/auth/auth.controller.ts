@@ -21,7 +21,7 @@ export class AuthController {
   async register(@Body() registerDto: RegisterDto) {
     return await this.authService.register(registerDto);
   }
-
+  // Endpoint to verify a user after registration (e.g., OTP verification)
   @Post('register-verify')
   async verifyUser(@Body() verifyUserDto: VerifyUserDto) {
     return await this.authService.verify(verifyUserDto);
