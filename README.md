@@ -2,9 +2,8 @@
   <h1>🌐 CareShareNepal Backend</h1>
 </p>
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
-
+![CircleCI Build Status][circleci-image]  
+[![CircleCI][circleci-image]][circleci-url]
 
 
 ## Description
