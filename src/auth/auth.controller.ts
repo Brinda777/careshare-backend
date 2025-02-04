@@ -13,6 +13,7 @@ import { IPayload } from './model';
 // Define the controller for authentication, using the '/auth' route
 @Controller('auth')
 export class AuthController {
+  // Inject AuthService to handle authentication-related business logic
   constructor(private readonly authService: AuthService) {}
 
   @Post('register')
