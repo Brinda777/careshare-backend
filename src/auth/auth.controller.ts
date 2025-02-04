@@ -7,6 +7,7 @@ import {
   UpdatePasswordDto,
   VerifyUserDto,
 } from './dto';
+// Import custom decorators and interfaces for authentication and user handling
 import { AtGuard, CurrentUser } from './decorator';
 import { IPayload } from './model';
 
